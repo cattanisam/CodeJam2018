@@ -36,4 +36,22 @@ CREATE TABLE `TwoDaysAgoFires` (
     UNIQUE KEY `TwoDaysAgoFireID_UNIQUE` (`TwoDaysAgoFireID`)
     );
 
+CREATE TABLE `Cities`(
+    `CityID` int(11) NOT NULL AUTO_INCREMENT,
+    `City_Name` varchar(45) DEFAULT NULL,
+    `City_Ascii` varchar(45) DEFAULT NULL,
+    `Latitude` varchar(45) DEFAULT NULL,
+    `Longitude` varchar(45) DEFAULT NULL,
+    `Country` varchar(45) DEFAULT NULL,
+    `Country2Abb` varchar(45) DEFAULT NULL,
+    `Country3Abb` varchar(45) DEFAULT NULL,
+    `Admin_Name` varchar(45) DEFAULT NULL,
+    `Capital` varchar(45) DEFAULT NULL,
+    `Population` varchar(45) DEFAULT NULL,
+    `ID` varchar(45) DEFAULT NULL,
+    PRIMARY KEY (`CityID`),
+    UNIQUE KEY `CityID_UNIQUE` (`CityID`)
+);
+
 insert into TwoDaysAgoFires (Latitude, Longitude, Brightness, Scan, Track,ACG_Date, ACG_Time, Satellite, Confidence, Version, Bright_T31, FRP, DayNight) values
+insert into Cities (City_Name, City_Ascii, Latitude, Longitude, Country, Country2Abb, Country3Abb, Admin_Name, Capital, Population, ID) values
