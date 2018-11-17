@@ -1,8 +1,15 @@
 package ca.mcgill.codejam.controllers;
 
+import org.hibernate.Hibernate;
+
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import ca.mcgill.codejam.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.SQLQuery;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Formula{
 
@@ -50,6 +57,15 @@ public class Formula{
     }
 
     public static int firesLastDays(float latitude, float longitude){
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+        String sqlCall = "SELECT Latitude, Longitude, Brightness, ACG_Date, Confidence, Bright_T31, FRP FROM CurrentFires";
+        SQLQuery sqlReturn = session.createSQLQuery(sqlCall);
+        List<Object[]> currentFires = sqlReturn.list();
+
+        session.getTransaction().commit();
+        session.close();
         return 0;
     }
 
