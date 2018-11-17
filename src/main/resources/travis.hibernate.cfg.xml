@@ -1,0 +1,44 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-configuration SYSTEM 
+"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+   <session-factory>
+
+    <property name="hibernate.generate_statistics">
+        false
+    </property>
+
+   <property name = "show_sql">
+        false
+    </property>
+   
+    <property name = "hibernate.dialect">
+        org.hibernate.dialect.MySQLDialect
+    </property>
+      
+    <property name = "hibernate.connection.driver_class">
+        com.mysql.cj.jdbc.Driver
+    </property>
+        
+    <property name = "hibernate.connection.url">
+        jdbc:mysql://p36ev4j46o29n9r2:uno6p32b94ovzfxg@k3xio06abqa902qt.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/zhzf96tinazyiudi?serverTimezone=UTC&amp;useSSL=false
+    </property>
+    
+    <property name = "hibernate.connection.username">
+        p36ev4j46o29n9r2
+    </property>
+    
+    <property name = "hibernate.connection.password">
+        uno6p32b94ovzfxg
+    </property>
+
+    <property name="connection.pool_size">
+        1000
+    </property>
+
+    <!--sample for class mapping when/if we need
+    <mapping class="ca.mcgill.ecse321.model.Admin" />
+    -->
+      
+   </session-factory>
+</hibernate-configuration>
