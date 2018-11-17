@@ -3,7 +3,6 @@ package ca.mcgill.codejam.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.SQLQuery;
