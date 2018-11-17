@@ -22,23 +22,19 @@ public class Formula{
         }else if (latitude <= 20){
             return 2.5;
         }else if (latitude > 20 && latitude <= 40){
-            if(requested.getMonth() >= 4 || requested.getMonth() <= 10){
+            if(requested.getMonth() >= 3 || requested.getMonth() <= 9){
                 return 2.5;
             }else{
                 return 0.2;
             }
         }else{
-            if(requested.getMonth() >= 5 || requested.getMonth() <= 9){
+            if(requested.getMonth() >= 4 || requested.getMonth() <= 8){
                 return 2.5;
             }else{
                 return 0.2;
             }
         }
 
-    }
-
-    public static int fireOccured(float latitude, float longitude){
-        return 0;
     }
 
     public static double fireStrength(int fireOccurred, float brightness, float confidence, float brightT31, float frp){
