@@ -1,4 +1,4 @@
-package ca.mcgill.codejam;
+package ca.mcgill.codejam.controllers;
 
 import ca.mcgill.HibernateUtil;
 import org.hibernate.Session;
