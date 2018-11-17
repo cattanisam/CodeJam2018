@@ -83,30 +83,46 @@ public class Formula{
         query1.setParameter("MAXLONG", maxLong);
         query1.setParameter("MINLONG", minLong);
 
-        List<Object[]> resultList = query1.list();
-        int resultCount = 0;
-        for (Object[] fires: resultList){
-                resultCount++;
+        List<Integer> resultList = query1.list();
 
-        }
-        return resultCount;
+        session.getTransaction().commit();
+        session.close();
+        
+        return resultList.size();
     }
 
     public static int firesLastDays(float latitude, float longitude){
         Session session = HibernateUtil.getSession();
         session.beginTransaction();
 
-        String sqlCall = "SELECT Latitude, Longitude, Brightness, ACG_Date, Confidence, Bright_T31, FRP FROM CurrentFires";
+        String sqlCall = "SELECT YesterdayFireID from YesterdayFires WHERE Latitude = :LATITUDE AND Longitude = :LONGITUDE";
         SQLQuery sqlReturn = session.createSQLQuery(sqlCall);
-        List<Object[]> currentFires = sqlReturn.list();
+        sqlReturn.setParameter("LATITUDE", latitude);
+        sqlReturn.setParameter("LONGITUDE", longitude);
+
+        List<Integer> resultList = sqlReturn.list();
 
         session.getTransaction().commit();
         session.close();
-        return 0;
+
+        Session session2 = HibernateUtil.getSession();
+        session2.beginTransaction();
+
+        String sqlCall2 = "SELECT TwoDaysAgoFireID from TwoDaysAgoFires WHERE Latitude = :LATITUDE AND Longitude = :LONGITUDE";
+        SQLQuery sqlReturn2 = session2.createSQLQuery(sqlCall2);
+        sqlReturn2.setParameter("LATITUDE", latitude);
+        sqlReturn2.setParameter("LONGITUDE", longitude);
+
+        List<Integer> resultList2 = sqlReturn2.list();
+
+        session2.getTransaction().commit();
+        session2.close();
+
+        return resultList.size() + resultList2.size();
     }
 
-    public static double  probDamagingFire(double theta){
-        return (Math.exp(theta) / (1 + Math.exp(theta)));
+    public static double probDamagingFire(double theta){
+        return theta;
     }
 
     public static float probLargeFire(float theta){

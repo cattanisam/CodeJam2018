@@ -1,5 +1,6 @@
 package ca.mcgill.codejam.controllers;
 
+import java.text.Normalizer.Form;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,17 +51,19 @@ public class CalculationController{
 
             }catch(Exception e){
 
-            } 
+            }
+
+            System.out.println(latitude);
 
             double fireStrength = Formula.fireStrength(1, brightness, confidence, brightT31, frp);
             double probFireStrength = Formula.probDamagingFire(fireStrength);
             double fireSeason = Formula.MonthMultiplier(latitude, longitude, date);
-            //double firesAround = method;
-            //double fireYesterday = method;
-            double prob = 33.3;
+            int firesAround = Formula.numFiresAround(latitude, longitude);
+            double firePast = Formula.firesLastDays(latitude, longitude);
+            double prob = Formula.overallProb((float) probFireStrength, (float) (fireSeason * (firesAround + firePast)));
 
             
-            double[] fireData = {(double) latitude, (double) longitude, prob};
+            double[] fireData = {(double) latitude, (double) longitude, prob / 500};
             fireProbs.add(fireData);
         }
 
