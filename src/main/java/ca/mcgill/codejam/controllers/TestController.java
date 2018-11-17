@@ -1,6 +1,6 @@
 package ca.mcgill.codejam.controllers;
 
-import ca.mcgill.HibernateUtil;
+import ca.mcgill.codejam.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.web.bind.annotation.*;
