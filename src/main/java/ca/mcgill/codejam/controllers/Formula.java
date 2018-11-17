@@ -11,6 +11,17 @@ import org.hibernate.SQLQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+import ca.mcgill.codejam.HibernateUtil;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.springframework.web.bind.annotation.*;
+import org.hibernate.Hibernate;
+import org.hibernate.Transaction;
+import org.hibernate.SQLQuery;
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Formula{
 
     public static double MonthMultiplier(float latitude, float longitude, String date){
@@ -53,7 +64,32 @@ public class Formula{
     }
 
     public static int numFiresAround(float latitude, float longitude){
-        return 0;
+        
+        Session session = HibernateUtil.getSession();
+        session.beginTransaction();
+
+
+        float minLat = latitude - 2;
+        float minLong = longitude - 2;
+        float maxLat = latitude + 2;
+        float maxLong = longitude + 2;
+
+        String queryString = "SELECT CurrentFireID from CurrentFires WHERE Latitude <= :MAXLAT AND Latitude >= :MINLAT AND Longitude <= :MAXLONG AND Longitude >= :MINLONG";
+
+        SQLQuery query1 = session.createSQLQuery(queryString);
+
+        query1.setParameter("MAXLAT", maxLat);
+        query1.setParameter("MINLAT", minLat);
+        query1.setParameter("MAXLONG", maxLong);
+        query1.setParameter("MINLONG", minLong);
+
+        List<Object[]> resultList = query1.list();
+        int resultCount = 0;
+        for (Object[] fires: resultList){
+                resultCount++;
+
+        }
+        return resultCount;
     }
 
     public static int firesLastDays(float latitude, float longitude){
