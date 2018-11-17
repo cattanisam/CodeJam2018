@@ -3,7 +3,3 @@ language: java
 services:
   - mysql
 
-before_install:
-  - cp backend/src/test/resources/test.hibernate.cfg.xml backend/src/main/resources/hibernate.cfg.xml
-  - mysql -u root -h localhost < backend/src/main/resources/dbo.sql
-  - cd backend
